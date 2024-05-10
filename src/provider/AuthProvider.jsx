@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
+import Swal from 'sweetalert2'
 
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
@@ -37,7 +38,14 @@ const AuthProvider = ({ children }) => {
 
   const logOut = async () => {
     setLoading(true)
+    Swal.fire({
+      icon: 'success',
+      title: 'Log out successful',
+      showConfirmButton: false,
+      timer: 1500,
+    });
     return signOut(auth)
+    
   }
 
   const updateUserProfile = (name, photo) => {

@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAIC7pbm1chR_2_VsrlQ-FnupjDppdbhjo",
-  authDomain: "solospehere.firebaseapp.com",
-  projectId: "solospehere",
-  storageBucket: "solospehere.appspot.com",
-  messagingSenderId: "838109354046",
-  appId: "1:838109354046:web:785d5aaf32012de6a9996f"
+  apiKey: "AIzaSyCX5tQK8aDmTS2T6k4qhkp6UxA1xMg2-Gc",
+  authDomain: "b9a11-client-side-farhad2590.firebaseapp.com",
+  projectId: "b9a11-client-side-farhad2590",
+  storageBucket: "b9a11-client-side-farhad2590.appspot.com",
+  messagingSenderId: "586340204740",
+  appId: "1:586340204740:web:805f62f2d1bf628dc3c991"
 };
 
 // Initialize Firebase

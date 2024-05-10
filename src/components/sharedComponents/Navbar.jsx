@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import logo from '../assets/images/logo.png'
-import { AuthContext } from '../provider/AuthProvider'
+// import logo from '../assets/images/logo.png'
+import { AuthContext } from '../../provider/AuthProvider'
 import { Link } from 'react-router-dom'
 const Navbar = () => {
   const { user,logOut } = useContext(AuthContext)
@@ -8,7 +8,7 @@ const Navbar = () => {
     <div className='navbar bg-base-100 shadow-sm container px-4 mx-auto'>
       <div className='flex-1'>
         <Link to="/" className='flex gap-2 items-center'>
-          <img className='w-auto h-7' src={logo} alt='' />
+          {/* <img className='w-auto h-7' src={logo} alt='' /> */}
           <span className='font-bold'>SoloSphere</span>
         </Link>
       </div>

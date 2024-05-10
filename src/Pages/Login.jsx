@@ -1,23 +1,35 @@
 import { Link, useNavigate } from "react-router-dom"
-import bgImg from '../assets/images/login.jpg'
-import logo from '../assets/images/logo.png'
-import { useContext } from "react"
+import bgImg from '../assets/Login.png'
+// import logo from '../assets/images/logo.png'
+import { useContext, useState } from "react"
 import { AuthContext } from "../provider/AuthProvider"
-import toast from 'react-hot-toast'
-
+import Swal from 'sweetalert2'
+import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const { signIn,
     signInWithGoogle } = useContext(AuthContext)
   const navigate = useNavigate()
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle()
-      toast.success('Signin Successful')
+      navigate('/')
+      Swal.fire({
+        icon: 'success',
+        title: 'Sign in successful',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (err) {
       console.log(err)
-      toast.error(err?.message)
+      Swal.fire({
+        icon: 'error',
+        title: 'Sign in failed',
+        showConfirmButton: false,
+        timer: 1500,
+      });
 
     }
   }
@@ -29,15 +41,51 @@ const Login = () => {
     const email = form.email.value
     const pass = form.password.value
     console.log({ email, pass })
+    if (pass.length < 6) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Password should be 6 character or more',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return
+    }
+    else if (!/[A-Z]/.test(pass)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Password should have at lease one Uppercase letter',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
+    else if (!/[a-z]/.test(pass)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Password should have at lease one Uppercase letter',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
     try {
-      //User Login
       const result = await signIn(email, pass)
       console.log(result.user)
       navigate('/')
-      toast.success('Signin Successful')
+      Swal.fire({
+        icon: 'success',
+        title: 'Log in successful',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (err) {
       console.log(err)
-      toast.error(err?.message)
+      Swal.fire({
+        icon: 'error',
+        title: 'Log in failed',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   }
   return (
@@ -54,7 +102,7 @@ const Login = () => {
           <div className='flex justify-center mx-auto'>
             <img
               className='w-auto h-7 sm:h-8'
-              src={logo}
+              // src={logo}
               alt=''
             />
           </div>
@@ -62,6 +110,7 @@ const Login = () => {
           <p className='mt-3 text-xl text-center text-gray-600 '>
             Welcome back!
           </p>
+
 
           <div onClick={handleGoogleSignIn} className='flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 '>
             <div className='px-4 py-2'>
@@ -99,6 +148,7 @@ const Login = () => {
 
             <span className='w-1/5 border-b dark:border-gray-400 lg:w-1/4'></span>
           </div>
+          {/*  */}
           <form onSubmit={handleSignIn}>
             <div className='mt-4'>
               <label
@@ -126,13 +176,18 @@ const Login = () => {
                 </label>
               </div>
 
-              <input
-                id='loggingPassword'
-                autoComplete='current-password'
-                name='password'
-                className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
-                type='password'
-              />
+              <div className="relative">
+                <input
+                  id='loggingPassword'
+                  autoComplete='current-password'
+                  name='password'
+                  className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
+                  type={showPassword ? "text" : "password"}
+                />
+                <span className="absolute top-3 right-3" onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <FaRegEyeSlash /> : <FaEye />}
+                </span>
+              </div>
             </div>
             <div className='mt-6'>
               <button
