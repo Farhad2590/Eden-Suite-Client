@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className='flex-1'>
         <Link to="/" className='flex gap-2 items-center'>
           {/* <img className='w-auto h-7' src={logo} alt='' /> */}
-          <span className='font-bold'>SoloSphere</span>
+          <span className='font-bold'>EdenSuite</span>
         </Link>
       </div>
       <div className='flex-none'>
@@ -47,18 +47,10 @@ const Navbar = () => {
                 tabIndex={0}
                 className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
               >
-                <li>
-                  <div className='justify-between'>Add Job</div>
-                </li>
-                <li>
-                  <div>My Posted Jobs</div>
-                </li>
-                <li>
-                  <div>My Bids</div>
-                </li>
-                <li>
-                  <div>Bid Requests</div>
-                </li>
+                <Link to='/rooms'>
+                  <div className='justify-between'>Rooms</div>
+                </Link>
+
                 <li className='mt-2'>
                   <button onClick={logOut} className='bg-gray-200 block text-center'>Logout</button>
                 </li>

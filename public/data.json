@@ -1,0 +1,217 @@
+[
+    {
+        "category": "Single Room",
+        "title": "Single Room - Single Bed",
+        "room_description": "Standard Single Room",
+        "price_per_night": 80,
+        "room_size": "200 sq. ft.",
+        "max_guests": 1,
+        "beds": 1,
+        "availability": "Available",
+        "room_images": [
+            "https://example.com/images/standard_single_1.jpg",
+            "https://example.com/images/standard_single_2.jpg",
+            "https://example.com/images/standard_single_3.jpg"
+        ],
+        "banner_image": "https://i.ibb.co/X2qP14b/card1.webp",
+        "features_paragraph": "Featuring a single bed, two pillows, and a duvet. Each room has an en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities.",
+        "special_offers": [
+            {
+                "offer_name": "Solo Traveler Discount",
+                "offer_description": "10% off for solo travelers"
+            }
+        ]
+    },
+    {
+        "category": "Double Room",
+        "title": "Double Room - Double Bed",
+        "room_description": "Standard Double Room",
+        "price_per_night": 100,
+        "room_size": "250 sq. ft.",
+        "max_guests": 2,
+        "beds": 1,
+        "availability": "Available",
+        "room_images": [
+            "https://example.com/images/standard_double_1.jpg",
+            "https://example.com/images/standard_double_2.jpg",
+            "https://example.com/images/standard_double_3.jpg"
+        ],
+        "banner_image": "https://i.ibb.co/kx9ggBn/card2.webp",
+        "features_paragraph": "Featuring a double bed, two pillows, and a duvet. Each room has an en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities.",
+        "special_offers": [
+            {
+                "offer_name": "Early Bird Discount",
+                "offer_description": "Book at least 30 days in advance and get 15% off"
+            }
+        ]
+    },
+    {
+        "category": "Twin Room",
+        "title": "Twin Room - Twin Beds",
+        "room_description": "Standard Twin Room",
+        "price_per_night": 120,
+        "room_size": "300 sq. ft.",
+        "max_guests": 2,
+        "beds": 2,
+        "availability": "Available",
+        "room_images": [
+            "https://example.com/images/standard_twin_1.jpg",
+            "https://example.com/images/standard_twin_2.jpg",
+            "https://example.com/images/standard_twin_3.jpg"
+        ],
+        "banner_image": "https://i.ibb.co/BLQqkHc/card3.webp",
+        "features_paragraph": "Featuring twin beds, two pillows each, and duvets. Each room has an en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities.",
+        "special_offers": [
+            {
+                "offer_name": "Midweek Special",
+                "offer_description": "20% off for stays from Monday to Thursday"
+            }
+        ]
+    },
+    {
+        "category": "Triple Room",
+        "title": "Triple Room - Three Single Beds",
+        "room_description": "Standard Triple Room",
+        "price_per_night": 150,
+        "room_size": "350 sq. ft.",
+        "max_guests": 3,
+        "beds": 3,
+        "availability": "Available",
+        "room_images": [
+            "https://example.com/images/standard_triple_1.jpg",
+            "https://example.com/images/standard_triple_2.jpg",
+            "https://example.com/images/standard_triple_3.jpg"
+        ],
+        "banner_image": "https://i.ibb.co/1zP7DBh/card4.webp",
+        "features_paragraph": "Featuring three single beds, two pillows each, and duvets. Each room has an en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities.",
+        "special_offers": [
+            {
+                "offer_name": "Family Discount",
+                "offer_description": "Special discount for family stays"
+            }
+        ]
+    },
+    {
+        "category": "Double Room",
+        "title": "Standard Plus Double Room - Double Bed",
+        "room_description": "Spacious double room with upgraded amenities",
+        "price_per_night": 120,
+        "room_size": "300 sq. ft.",
+        "max_guests": 2,
+        "beds": 1,
+        "availability": "Available",
+        "room_images": [
+            "https://example.com/images/standard_plus_double_1.jpg",
+            "https://example.com/images/standard_plus_double_2.jpg",
+            "https://example.com/images/standard_plus_double_3.jpg"
+        ],
+        "banner_image": "https://i.ibb.co/PMDhKMK/card5.webp",
+        "features_paragraph": "Enjoy a comfortable stay in our Standard Plus Double Room, featuring a spacious layout, upgraded amenities, en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities.",
+        "special_offers": [
+            {
+                "offer_name": "Early Bird Discount",
+                "offer_description": "Book at least 30 days in advance and get 15% off"
+            }
+        ]
+    },
+    {
+        "category": "Twin Room",
+        "title": "Standard Plus Twin Room - Twin Beds",
+        "room_description": "Comfortable twin room with upgraded amenities",
+        "price_per_night": 130,
+        "room_size": "320 sq. ft.",
+        "max_guests": 2,
+        "beds": 2,
+        "availability": "Available",
+        "room_images": [
+            "https://example.com/images/standard_plus_twin_1.jpg",
+            "https://example.com/images/standard_plus_twin_2.jpg",
+            "https://example.com/images/standard_plus_twin_3.jpg"
+        ],
+        "banner_image": "https://i.ibb.co/mDfhmX3/card6.webp",
+        "features_paragraph": "Indulge in a relaxing stay in our Standard Plus Twin Room, featuring upgraded amenities, two comfortable beds, en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities.",
+        "special_offers": [
+            {
+                "offer_name": "Midweek Special",
+                "offer_description": "20% off for stays from Monday to Thursday"
+            }
+        ]
+    },
+    {
+        "category": "Twin Room",
+        "title": "Standard Plus Twin - Extra Bed - Twin Beds",
+        "room_description": "Twin room with an additional extra bed",
+        "price_per_night": 150,
+        "room_size": "350 sq. ft.",
+        "max_guests": 3,
+        "beds": 2,
+        "availability": "Available",
+        "room_images": [
+            "https://example.com/images/standard_plus_twin_extra_bed_1.jpg",
+            "https://example.com/images/standard_plus_twin_extra_bed_2.jpg",
+            "https://example.com/images/standard_plus_twin_extra_bed_3.jpg"
+        ],
+        "banner_image": "https://i.ibb.co/bbKMn7R/card7.webp",
+        "features_paragraph": "Experience the comfort of our Standard Plus Twin Room with an Extra Bed, perfect for small families or groups. Enjoy upgraded amenities, an additional extra bed, en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities.",
+        "special_offers": []
+    },
+    {
+        "category": "Triple Room",
+        "title": "Standard Plus Triple Room - Three Single Beds",
+        "room_description": "Spacious triple room with upgraded amenities",
+        "price_per_night": 180,
+        "room_size": "400 sq. ft.",
+        "max_guests": 3,
+        "beds": 3,
+        "availability": "Available",
+        "room_images": [
+            "https://example.com/images/standard_plus_triple_1.jpg",
+            "https://example.com/images/standard_plus_triple_2.jpg",
+            "https://example.com/images/standard_plus_triple_3.jpg"
+        ],
+        "banner_image": "https://i.ibb.co/f4n0yzv/card8.webp",
+        "features_paragraph": "Relax and unwind in our spacious Standard Plus Triple Room, equipped with upgraded amenities, three comfortable beds, en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities.",
+        "special_offers": [
+            {
+                "offer_name": "Family Discount",
+                "offer_description": "Special discount for family stays"
+            }
+        ]
+    },
+    {
+        "category": "Triple Room",
+        "title": "Standard Plus Triple - Extra Bed - Three Single Beds",
+        "room_description": "Triple room with an additional extra bed",
+        "price_per_night": 200,
+        "room_size": "450 sq. ft.",
+        "max_guests": 4,
+        "beds": 3,
+        "availability": "Available",
+        "room_images": [
+            "https://example.com/images/standard_plus_triple_extra_bed_1.jpg",
+            "https://example.com/images/standard_plus_triple_extra_bed_2.jpg",
+            "https://example.com/images/standard_plus_triple_extra_bed_3.jpg"
+        ],
+        "banner_image": "https://i.ibb.co/2ZXKRPx/card9.webp",
+        "features_paragraph": "Experience the convenience of our Standard Plus Triple Room with an Extra Bed, perfect for larger families or groups. Enjoy upgraded amenities, an additional extra bed, en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities.",
+        "special_offers": []
+    },
+    {
+        "category": "Triple Room",
+        "title": "Family Room - Multiple Beds",
+        "room_description": "Spacious family room with upgraded amenities",
+        "price_per_night": 220,
+        "room_size": "500 sq. ft.",
+        "max_guests": 5,
+        "beds": 4,
+        "availability": "Available",
+        "room_images": [
+            "https://example.com/images/family_room_1.jpg",
+            "https://example.com/images/family_room_2.jpg",
+            "https://example.com/images/family_room_3.jpg"
+        ],
+        "banner_image": "https://i.ibb.co/0sJgpJc/card10.webp",
+        "features_paragraph": "Create unforgettable memories in our spacious Family Room, featuring upgraded amenities, comfortable bedding arrangements, en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities. Ideal for families seeking comfort and convenience.",
+        "special_offers": []
+    }
+]
