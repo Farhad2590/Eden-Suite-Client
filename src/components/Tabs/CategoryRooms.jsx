@@ -1,8 +1,9 @@
 import { IoMdPerson } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 
 const CategoryRooms = ({ room }) => {
-    const { banner_image, title, max_guests, availability, room_size, features_paragraph } = room
+    const { _id,banner_image, title, max_guests, availability, room_size, features_paragraph } = room
     return (
         <div className="bg-white   flex lg:w-full ">
             <div className="lg:w-[50%]">
@@ -19,7 +20,8 @@ const CategoryRooms = ({ room }) => {
                 <p className="text-xl">Room Stastus : {availability}</p>
                 <p>{features_paragraph}</p>
                 <div >
-                    <a
+                    <Link
+                        to={`/rooms/${_id}`}
                         className="px-8 py-4"
                         style={{
                             borderColor: '#fad44a',
@@ -32,7 +34,7 @@ const CategoryRooms = ({ room }) => {
                         }}
                     >
                         Book Now
-                    </a>
+                    </Link>
                 </div>
 
 

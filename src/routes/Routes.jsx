@@ -32,8 +32,6 @@ const router = createBrowserRouter([
       {
         path: "/rooms",
         element: <Rooms></Rooms>,
-        // loader: ()=>fetch('data.json')
-        // loader: ()=>fetch`${import.meta.env.VITE_URL}/rooms`
       },
       {
         path: '/rooms/:id',
