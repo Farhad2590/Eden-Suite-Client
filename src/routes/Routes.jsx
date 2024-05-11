@@ -7,6 +7,7 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Registration from "../Pages/Registration";
 import Rooms from "../Pages/Rooms";
+import RoomPages from "../Pages/RoomPages";
 
 
 
@@ -18,20 +19,29 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        
+
       },
       {
         path: "/login",
-        element: <Login></Login>, 
+        element: <Login></Login>,
       },
       {
         path: "/registration",
-        element: <Registration></Registration>, 
+        element: <Registration></Registration>,
       },
       {
         path: "/rooms",
-        element: <Rooms></Rooms>, 
-        loader: ()=>fetch('data.json')
+        element: <Rooms></Rooms>,
+        // loader: ()=>fetch('data.json')
+        // loader: ()=>fetch`${import.meta.env.VITE_URL}/rooms`
+      },
+      {
+        path: '/rooms/:id',
+        element: (
+          <RoomPages></RoomPages>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_URL}/rooms/${params.id}`),
       },
     ]
   },

@@ -10,7 +10,7 @@ const TabCategories = () => {
     console.log(rooms);
     useEffect(() => {
         const getData = async () => {
-            const { data } = await axios('/data.json')
+            const { data } = await axios(`${import.meta.env.VITE_URL}/rooms`)
             setRooms(data)
         }
         getData()
@@ -37,7 +37,7 @@ const TabCategories = () => {
                         {rooms
                             .slice(0, 4)
                             .map(room => (
-                                <CategoryRooms room={room} />
+                                <CategoryRooms key={room._id} room={room} />
                             ))}
                     </div>
                 </TabPanel>
@@ -47,7 +47,7 @@ const TabCategories = () => {
                         {rooms
                             .filter(r => r.category === 'Single Room')
                             .map(room => (
-                                <CategoryRooms room={room} />
+                                <CategoryRooms key={room._id} room={room} />
                             ))}
                     </div>
                 </TabPanel>
@@ -57,7 +57,7 @@ const TabCategories = () => {
                         {rooms
                             .filter(r => r.category === 'Double Room')
                             .map(room => (
-                                <CategoryRooms room={room} />
+                                <CategoryRooms key={room._id} room={room} />
                             ))}
                     </div>
                 </TabPanel>
@@ -67,7 +67,7 @@ const TabCategories = () => {
                         {rooms
                             .filter(r => r.category === 'Twin Room')
                             .map(room => (
-                                <CategoryRooms room={room} />
+                                <CategoryRooms key={room._id} room={room} />
                             ))}
                     </div>
                 </TabPanel>
@@ -77,7 +77,7 @@ const TabCategories = () => {
                         {rooms
                             .filter(r => r.category === 'Triple Room')
                             .map(room => (
-                                <CategoryRooms room={room} />
+                                <CategoryRooms key={room._id} room={room} />
                             ))}
                     </div>
                 </TabPanel>
