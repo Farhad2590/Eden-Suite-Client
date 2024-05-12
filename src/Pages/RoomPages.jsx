@@ -44,24 +44,6 @@ const RoomPages = () => {
             console.log(err);
         }
     }
-
-    const handleReviewSubmit = async e => {
-        e.preventDefault()
-        const form = e.target
-        
-        const reviewData = {
-          
-        }
-        try {
-          const { data } = await axios.post(
-            `${import.meta.env.VITE_URL}/review`,reviewData)
-          console.log(data)
-        } catch (err) {
-          console.log(err)
-        }
-      }
-
-
     return (
         <div className='bg-[#ebefeb]  flex flex-col md:flex-row justify-around gap-5  items-center min-h-[calc(100vh-306px)] md:max-w-screen-xl mx-auto '>
             <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
