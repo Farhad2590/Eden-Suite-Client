@@ -8,6 +8,7 @@ import Login from "../Pages/Login";
 import Registration from "../Pages/Registration";
 import Rooms from "../Pages/Rooms";
 import RoomPages from "../Pages/RoomPages";
+import MyBooking from "../Pages/MyBooking";
 
 
 
@@ -40,6 +41,11 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_URL}/rooms/${params.id}`),
+      },
+      {
+        path: "/myBookings",
+        element: <MyBooking></MyBooking>,
+       
       },
     ]
   },

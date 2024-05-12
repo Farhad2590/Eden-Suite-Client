@@ -45,10 +45,26 @@ const RoomPages = () => {
         }
     }
 
+    const handleReviewSubmit = async e => {
+        e.preventDefault()
+        const form = e.target
+        
+        const reviewData = {
+          
+        }
+        try {
+          const { data } = await axios.post(
+            `${import.meta.env.VITE_URL}/review`,reviewData)
+          console.log(data)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+
 
     return (
         <div className='bg-[#ebefeb]  flex flex-col md:flex-row justify-around gap-5  items-center min-h-[calc(100vh-306px)] md:max-w-screen-xl mx-auto '>
-            <div className="max-w-2xl overflow-hidden bg-[#ebefeb] rounded-lg shadow-md dark:bg-gray-800">
+            <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
                 <div className="relative ">
                     <img className="object-cover w-full h-64" src={banner_image} alt="Article" />
                     <div id="one" className="p-2 rounded-b-lg absolute top-0 right-0 flex items-center bg-white">
@@ -88,13 +104,12 @@ const RoomPages = () => {
                             <div className="flex items-center">
                                 <h1 className="px-2 text-xl"> Reviews:</h1>
                             </div>
-
                         </div>
                     </div>
                 </div>
                 <div className="py-2 dark:bg-gray-100">
                     <h1 href="#" className="text-center block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabIndex="0" role="link">Our {room_description} images</h1>
-                    <div className="container flex flex-col justify-center p-4 mx-auto" bis_skin_checked="1">
+                    <div className="container flex flex-col justify-center p-4 mx-auto">
                         <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 sm:grid-cols-2">
                             {room_images.map((roomImage, index) => (
                                 <img key={index} className="object-cover w-full dark:bg-gray-500 aspect-square" src={roomImage} alt={`Room ${index}`} />
@@ -161,6 +176,7 @@ const RoomPages = () => {
                                                         name="bookingFrom"
                                                         id="bookingFrom"
                                                         value={bookingFrom}
+                                                        required
                                                         onChange={(e) => setBookingFrom(e.target.value)}
                                                     />
                                                 </div>
@@ -171,6 +187,7 @@ const RoomPages = () => {
                                                         name="bookingTo"
                                                         id="bookingTo"
                                                         value={bookingTo}
+                                                        required
                                                         onChange={(e) => setBookingTo(e.target.value)}
                                                     />
                                                 </div>
