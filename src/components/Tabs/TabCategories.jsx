@@ -7,7 +7,7 @@ import axios from 'axios'
 import CategoryRooms from './CategoryRooms'
 const TabCategories = () => {
     const [rooms, setRooms] = useState([])
-    console.log(rooms);
+    // console.log(rooms);
     useEffect(() => {
         const getData = async () => {
             const { data } = await axios(`${import.meta.env.VITE_URL}/rooms`)
@@ -17,7 +17,7 @@ const TabCategories = () => {
     }, [])
 
     return (
-        <Tabs className='bg-[#ebefeb]'>
+        <Tabs className=''>
             <div className=' container px-6 py-10 mx-auto'>
                 <h1 className='text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl '>
                     Explore Our Rooms by Category

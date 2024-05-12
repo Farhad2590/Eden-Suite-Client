@@ -3,7 +3,7 @@ import TabCategories from '../components/Tabs/TabCategories'
 
 const Home = () => {
     return (
-        <div>
+        <div className='bg-[#ebefeb]'>
             <Carousel></Carousel>
             <TabCategories></TabCategories>
         </div>

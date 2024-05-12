@@ -5,6 +5,7 @@ import { useContext, useState } from "react"
 import { AuthContext } from "../provider/AuthProvider"
 import Swal from 'sweetalert2'
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
+import axios from 'axios'
 
 const Login = () => {
   const { signIn,
@@ -14,7 +15,15 @@ const Login = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle()
+      const result = await signInWithGoogle()
+      console.log(result.user)
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_URL}/jwt`,
+        {
+          email: result?.user?.email
+        },{withCredentials:true}
+        )
+      console.log(data)
       navigate('/')
       Swal.fire({
         icon: 'success',
@@ -71,6 +80,8 @@ const Login = () => {
     try {
       const result = await signIn(email, pass)
       console.log(result.user)
+
+
       navigate('/')
       Swal.fire({
         icon: 'success',
