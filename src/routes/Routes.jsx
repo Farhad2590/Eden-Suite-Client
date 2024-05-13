@@ -8,6 +8,9 @@ import Login from "../Pages/Login";
 import Registration from "../Pages/Registration";
 import Rooms from "../Pages/Rooms";
 import RoomPages from "../Pages/RoomPages";
+// import MyBook from "../Pages/MyBook";
+import PrivateRoute from "../routes/PrivateRoute";
+import Error from "../Pages/Error";
 import MyBooking from "../Pages/MyBooking";
 
 
@@ -16,6 +19,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -37,15 +41,15 @@ const router = createBrowserRouter([
       {
         path: '/rooms/:id',
         element: (
-          <RoomPages></RoomPages>
+          <PrivateRoute><RoomPages></RoomPages></PrivateRoute>
         ),
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_URL}/rooms/${params.id}`),
       },
       {
         path: "/myBookings",
-        element: <MyBooking></MyBooking>,
-       
+        element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>,
+
       },
     ]
   },

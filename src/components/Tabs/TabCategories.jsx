@@ -17,8 +17,8 @@ const TabCategories = () => {
     }, [])
 
     return (
-        <Tabs className=''>
-            <div className=' container px-6 py-10 mx-auto'>
+        <Tabs className='bg-white p-5'>
+            <div className=''>
                 <h1 className='text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl '>
                     Explore Our Rooms by Category
                 </h1>

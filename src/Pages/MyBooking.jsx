@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import moment from 'moment';
 
 
 
@@ -12,10 +12,14 @@ const MyBooking = () => {
   const [items, setItems] = useState([]);
   const [selectedRoomTitle, setSelectedRoomTitle] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpens, setIsOpens] = useState(false);
+  const [bookingFrom, setBookingFrom] = useState('');
+  const [bookingTo, setBookingTo] = useState('');
   const { user } = useContext(AuthContext)
   const name = user?.displayName;
   const email = user?.email;
   const image = user?.photoURL;
+
   console.log(user);
   useEffect(() => {
     const getData = async () => {
@@ -24,30 +28,52 @@ const MyBooking = () => {
     }
     getData()
   }, [user])
-  console.log(items);
 
   const handleCancelNow = async id => {
     console.log(id);
     const bookingData = {
       availability: 'Available',
     }
-    console.log(bookingData);
-    try {
-      const { data } = await axios.put(`${import.meta.env.VITE_URL}/rooms/${id}`, bookingData)
-      console.log(data)
-      if (data.modifiedCount > 0) {
-        Swal.fire({
-          title: 'Success!',
-          text: ' Cancel Successfully',
-          icon: 'success',
-          confirmButtonText: 'Cool'
-        })
+    console.log(items);
+    const bookingFromArray = items.find(item => item.bookingFrom);
+
+
+    const bookingDate = bookingFromArray.bookingFrom
+    console.log(bookingDate);
+    if (bookingDate)
+      try {
+        const confirmation = await Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
+        });
+
+        if (confirmation.isConfirmed) {
+          // User confirmed deletion
+          const { data } = await axios.put(`${import.meta.env.VITE_URL}/rooms/${id}`, bookingData);
+          console.log(data);
+          if (data.modifiedCount > 0) {
+            Swal.fire({
+              title: 'Success!',
+              text: 'Cancel Successfully',
+              icon: 'success',
+              confirmButtonText: 'Cool'
+            });
+          }
+        } else {
+          // User cancelled deletion
+          Swal.fire('Cancelled', 'Your action has been cancelled', 'info');
+        }
+      } catch (error) {
+        // Handle errors
+        console.error('Error:', error);
+        Swal.fire('Error', 'An error occurred', 'error');
       }
 
-
-    } catch (err) {
-      console.log(err);
-    }
   }
   const handleReviewSubmit = async e => {
     e.preventDefault()
@@ -58,7 +84,7 @@ const MyBooking = () => {
 
     // const roomTitel = items.title;
     const reviewData = {
-      comment_text, rating, timestamp: timestamp, name, email, image, room_title: selectedRoomTitle,
+      comment_text, rating, timestamp: timestamp, name, email, image, title: selectedRoomTitle,
     }
     console.log(reviewData);
     try {
@@ -74,6 +100,30 @@ const MyBooking = () => {
       setIsOpen(false)
     } catch (err) {
       console.log(err)
+    }
+  }
+  const handleUpdateNow = async id => {
+    console.log(id);
+    const bookingData = {
+      bookingFrom,
+      bookingTo,
+      availability: 'unAvailable',
+      email
+    }
+    console.log(bookingData);
+    try {
+      const { data } = await axios.put(`${import.meta.env.VITE_URL}/rooms/${id}`, bookingData)
+      console.log(data)
+      if (data.modifiedCount > 0) {
+        Swal.fire({
+          title: 'Success!',
+          text: ' Updated Successfully',
+          icon: 'success',
+          confirmButtonText: 'Cool'
+        })
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
   return (
@@ -210,16 +260,68 @@ const MyBooking = () => {
                 <td className="w-full md:w-auto">{list.price_per_night}</td>
                 <td className="w-full md:w-auto">{list.max_guests}</td>
                 <td className="w-full md:w-auto">{list.beds}</td>
-                <td className="w-full md:w-auto text-center">{list.bookingFrom} <br /> to <br /> {list.bookingTo}</td>
+                <td className="w-full md:w-auto text-center">{list.bookingFrom}</td>
                 <td>
                   <button onClick={() => { setIsOpen(true); setSelectedRoomTitle(list.title); }} className="btn btn-outline border border-[#a86a60] hover:bg-[#a86a60] hover:outline-none hover:text-white text-[#a86a60]">
                     Review
                   </button>
                 </td>
                 <td>
-                  <button className="btn btn-outline border border-[#a86a60] hover:bg-[#a86a60] hover:outline-none hover:text-white text-[#a86a60]">
+                  {/* <button className="btn btn-outline border border-[#a86a60] hover:bg-[#a86a60] hover:outline-none hover:text-white text-[#a86a60]">
+                    Update Now
+                  </button> */}
+                  <button onClick={() => setIsOpens(true)} className="px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                     Update Now
                   </button>
+                  {/* Modal for Update Form */}
+                  {isOpens && (
+                    <div className="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                      <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+                        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                        <div className="relative inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl rtl:text-right dark:bg-gray-900 sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                          <div className="flex items-center justify-between">
+                            <div className='flex flex-col '>
+                              <label className='text-gray-700'>From</label>
+                              <input
+                                type="date"
+                                name="bookingFrom"
+                                id="bookingFrom"
+                                value={bookingFrom}
+                                required
+                                onChange={(e) => setBookingFrom(e.target.value)}
+                              />
+                            </div>
+                            <div className='flex flex-col '>
+                              <label className='text-gray-700'>To</label>
+                              <input
+                                type="date"
+                                name="bookingTo"
+                                id="bookingTo"
+                                value={bookingTo}
+                                required
+                                onChange={(e) => setBookingTo(e.target.value)}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="mt-5 sm:flex sm:items-center sm:justify-between">
+                            <a href="#" className="text-sm text-blue-500 hover:underline">Learn more</a>
+
+                            <div className="sm:flex sm:items-center ">
+                              <button onClick={() => setIsOpens(false)} className="w-full px-4 py-2 mt-2 text-sm font-medium tracking-wide text-gray-700 capitalize transition-colors duration-300 transform border border-gray-200 rounded-md sm:mt-0 sm:w-auto sm:mx-2 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40">
+                                Cancel
+                              </button>
+
+                              <button onClick={() => handleUpdateNow(list._id)} className="btn btn-outline border border-[#a86a60] hover:bg-[#a86a60] hover:outline-none hover:text-white text-[#a86a60]">
+                                Update
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </td>
                 <td>
                   <button onClick={() => handleCancelNow(list._id)} className="btn btn-outline border border-[#a86a60] hover:bg-[#a86a60] hover:outline-none hover:text-white text-[#a86a60]">
@@ -278,6 +380,8 @@ const MyBooking = () => {
           </div>
         </div>
       )}
+
+
     </div>
   );
 };

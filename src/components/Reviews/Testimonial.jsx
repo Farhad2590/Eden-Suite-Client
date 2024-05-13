@@ -31,7 +31,7 @@ export default function Carousel() {
     }, []);
     console.log(review);
     return (
-        <div className='container px-6 py-10 mx-auto'>
+        <div className='mt-10'>
             <Swiper
                 spaceBetween={30}
                 centeredSlides={true}

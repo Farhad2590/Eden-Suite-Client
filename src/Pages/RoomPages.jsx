@@ -11,8 +11,9 @@ import axios from "axios";
 const RoomPages = () => {
     const rooms = useLoaderData()
     const [isOpen, setIsOpen] = useState(false);
+
     const [bookingFrom, setBookingFrom] = useState('');
-    const [bookingTo, setBookingTo] = useState('');
+    // const [bookingTo, setBookingTo] = useState('');
     const { user } = useContext(AuthContext)
 
     console.log(rooms);
@@ -23,7 +24,6 @@ const RoomPages = () => {
     const handleBookNowClick = async e => {
         const bookingData = {
             bookingFrom,
-            bookingTo,
             availability: 'unAvailable',
             email,
             name
@@ -150,7 +150,7 @@ const RoomPages = () => {
                                                     <h1 className="px-2 text-lg"> Available : {availability}</h1>
                                                 </div>
                                             </div>
-                                            <div className="flex items-center justify-between">
+                                            <div className="flex items-center justify-center">
                                                 <div className='flex flex-col '>
                                                     <label className='text-gray-700'>From</label>
                                                     <input
@@ -160,17 +160,6 @@ const RoomPages = () => {
                                                         value={bookingFrom}
                                                         required
                                                         onChange={(e) => setBookingFrom(e.target.value)}
-                                                    />
-                                                </div>
-                                                <div className='flex flex-col '>
-                                                    <label className='text-gray-700'>To</label>
-                                                    <input
-                                                        type="date"
-                                                        name="bookingTo"
-                                                        id="bookingTo"
-                                                        value={bookingTo}
-                                                        required
-                                                        onChange={(e) => setBookingTo(e.target.value)}
                                                     />
                                                 </div>
                                             </div>

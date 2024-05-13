@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const CategoryRooms = ({ room }) => {
     const { _id,banner_image, title, max_guests, availability, room_size, features_paragraph } = room
     return (
-        <div className="bg-white   flex lg:w-full ">
+        <div className="  rounded-2xl border  border-dashed p-2 flex lg:w-full ">
             <div className="lg:w-[50%]">
                 <img src={banner_image} alt="" />
             </div>
