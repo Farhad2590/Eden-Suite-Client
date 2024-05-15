@@ -21,7 +21,8 @@
                 "offer_name": "Solo Traveler Discount",
                 "offer_description": "10% off for solo travelers"
             }
-        ]
+        ],
+        "date": "2024-06-10"
     },
     {
         "category": "Double Room",
@@ -45,7 +46,8 @@
                 "offer_name": "Early Bird Discount",
                 "offer_description": "Book at least 30 days in advance and get 15% off"
             }
-        ]
+        ],
+        "date": "2024-06-10"
     },
     {
         "category": "Twin Room",
@@ -69,7 +71,8 @@
                 "offer_name": "Midweek Special",
                 "offer_description": "20% off for stays from Monday to Thursday"
             }
-        ]
+        ],
+        "date": "2024-06-10"
     },
     {
         "category": "Triple Room",
@@ -93,7 +96,8 @@
                 "offer_name": "Family Discount",
                 "offer_description": "Special discount for family stays"
             }
-        ]
+        ],
+        "date": "2024-06-10"
     },
     {
         "category": "Double Room",
@@ -117,7 +121,8 @@
                 "offer_name": "Early Bird Discount",
                 "offer_description": "Book at least 30 days in advance and get 15% off"
             }
-        ]
+        ],
+        "date": "2024-06-10"
     },
     {
         "category": "Twin Room",
@@ -141,7 +146,8 @@
                 "offer_name": "Midweek Special",
                 "offer_description": "20% off for stays from Monday to Thursday"
             }
-        ]
+        ],
+        "date": "2024-06-10"
     },
     {
         "category": "Twin Room",
@@ -160,7 +166,8 @@
         ],
         "banner_image": "https://i.ibb.co/bbKMn7R/card7.webp",
         "features_paragraph": "Experience the comfort of our Standard Plus Twin Room with an Extra Bed, perfect for small families or groups. Enjoy upgraded amenities, an additional extra bed, en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities.",
-        "special_offers": []
+        "special_offers": [],
+        "date": "2024-06-10"
     },
     {
         "category": "Triple Room",
@@ -184,7 +191,8 @@
                 "offer_name": "Family Discount",
                 "offer_description": "Special discount for family stays"
             }
-        ]
+        ],
+        "date": "2024-06-10"
     },
     {
         "category": "Triple Room",
@@ -203,7 +211,8 @@
         ],
         "banner_image": "https://i.ibb.co/2ZXKRPx/card9.webp",
         "features_paragraph": "Experience the convenience of our Standard Plus Triple Room with an Extra Bed, perfect for larger families or groups. Enjoy upgraded amenities, an additional extra bed, en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities.",
-        "special_offers": []
+        "special_offers": [],
+        "date": "2024-06-10"
     },
     {
         "category": "Triple Room",
@@ -222,6 +231,7 @@
         ],
         "banner_image": "https://i.ibb.co/0sJgpJc/card10.webp",
         "features_paragraph": "Create unforgettable memories in our spacious Family Room, featuring upgraded amenities, comfortable bedding arrangements, en-suite bathroom, free Wi-Fi, TV, radio, and tea/coffee making facilities. Ideal for families seeking comfort and convenience.",
-        "special_offers": []
+        "special_offers": [],
+        "date": "2024-06-10"
     }
 ]

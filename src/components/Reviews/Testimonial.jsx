@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation, Mousewheel, Keyboard } from 'swiper/modules';
 import Slide from './Slide';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -33,18 +33,19 @@ export default function Carousel() {
     return (
         <div className='mt-10'>
             <Swiper
-                spaceBetween={30}
-                centeredSlides={true}
-                loop={true}
+                slidesPerView={1}
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+                modules={[Autoplay, Navigation, Pagination, Mousewheel, Keyboard]}
                 autoplay={{
-                    delay: 5000,
+                    delay: 2000,
                     disableOnInteraction: false,
                 }}
-                pagination={{
-                    clickable: true,
-                }}
                 navigation={true}
-                modules={[Autoplay, Pagination, Navigation]}
+                pagination={true}
+                mousewheel={true}
+                keyboard={true}
+                cssMode={true}
                 className="mySwiper"
             >{
                     review.map(reviews => (<SwiperSlide key={reviews._id}>
@@ -52,7 +53,7 @@ export default function Carousel() {
                             image={reviews.image}
                             name={reviews.name}
                             comment_text={reviews.comment_text}
-                            text3='Best Hotel Deals In Town'
+                            rating={reviews.rating}
                         />
                     </SwiperSlide>))
                 }

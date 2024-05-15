@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Navbar from '../components/Maps/Navbar'
+import Navbar from '../components/sharedComponents/Navbar'
 import Footer from '../components/sharedComponents/Footer'
 
 const Main = () => {

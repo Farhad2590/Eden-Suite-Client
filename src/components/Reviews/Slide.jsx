@@ -1,6 +1,18 @@
+import React from 'react';
 
+const StarRating = ({ rating }) => {
+  const displayStars = (rating) => {
+    const numStars = Math.round(rating);
+    const stars = '⭐'.repeat(numStars);
+    return stars;
+  };
 
-const Slide = ({ image, name, comment_text, text3 }) => {
+  return (
+    <div className="star-rating">{displayStars(rating)}</div>
+  );
+};
+
+const Slide = ({ image, name, comment_text, text3, rating }) => {
   return (
     <div className="bg-white p-10">
       <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
@@ -13,19 +25,18 @@ const Slide = ({ image, name, comment_text, text3 }) => {
       </div>
       <div className="flex flex-col items-center justify-center mt-8">
         <img className="object-cover rounded-full w-24 h-24" src={image} alt="" />
-
         <div className="mt-4 text-center">
           <h1 className="text-3xl font-semibold text-gray-800 dark:text-white">{name}</h1>
         </div>
-
         <div className="w-[700px] mt-4 mb-16 text-center">
           <h1 className="font-semibold text-gray-800 dark:text-white">"{comment_text}"</h1>
         </div>
-
+        <div className="w-[700px] mt-4 mb-16 text-center">
+          <StarRating rating={rating} />
+        </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Slide
+export default Slide;
