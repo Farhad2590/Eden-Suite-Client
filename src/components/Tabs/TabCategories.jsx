@@ -22,7 +22,7 @@ const TabCategories = () => {
                 <h1 className='text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl '>
                     Explore Our Rooms by Category
                 </h1>
-
+                <div className="border border-dashed my-3"></div>
                 <div className='flex items-center justify-center'>
                     <TabList>
                         <Tab>All</Tab>

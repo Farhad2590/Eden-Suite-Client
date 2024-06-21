@@ -1,8 +1,8 @@
-import { MdOutlineBedroomChild } from "react-icons/md";
+
 import { useLoaderData } from "react-router-dom";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../provider/AuthProvider";
 // import toast from "react-hot-toast";
@@ -19,57 +19,173 @@ import Swal from 'sweetalert2'
 
 
 const RoomPages = () => {
-    const [startDate, setStartDate] = useState(new Date())
-    const { user } = useContext(AuthContext)
-    // const { Room_Image, Room_Name, Room_Description, Price, Adults, Room_Size } = room;
-    const rooms = useLoaderData()
-
-    // const [bookingTo, setBookingTo] = useState('');
+    // const [startDate, setStartDate] = useState(new Date())
     // const { user } = useContext(AuthContext)
+    // // const { Room_Image, Room_Name, Room_Description, Price, Adults, Room_Size } = room;
+    // const rooms = useLoaderData()
 
-    console.log(rooms);
-    const { _id, availability, banner_image, price_per_night, room_images, title, features_paragraph, room_description, max_guests, beds, room_size } = rooms
+    // // const [bookingTo, setBookingTo] = useState('');
+    // // const { user } = useContext(AuthContext)
 
-    const handleFormSubmission = async e => {
-        e.preventDefault()
-        const deadline = startDate
-        const email = user?.email
-        const name = user?.displayName;
+    // console.log(rooms);
+    // const { _id, availability, banner_image, price_per_night, room_images, title, features_paragraph, room_description, max_guests, beds, room_size } = rooms
+
+    // // const handleFormSubmission = async e => {
+    // //     e.preventDefault()
+    // //     const deadline = startDate
+    // //     const email = user?.email
+    // //     const name = user?.displayName;
 
 
-        const bookingData = {
+    // //     const bookingData = {
 
-            email,
-            availability: 'unAvailable',
-            name,
-            bookingId:_id,
-            deadline,
-            banner_image,
-            price_per_night,
-            room_images,
-            title,
-            features_paragraph,
-            room_description,
-            max_guests,
-            beds, 
-            room_size
-        }
-        console.log(bookingData)
-        try {
-            const { data } = await axios.post(`${import.meta.env.VITE_URL}/mybooking`, bookingData)
-            console.log(data)
-            Swal.fire({
-                icon: 'success',
-                title: 'Booking successful',
-                showConfirmButton: false,
-                timer: 1500,
-            });
-            // toast.success('Book Data added Successfully!')
-        } catch (err) {
-            console.log(err)
-            console.log('Hi, i am error', err.message)
-        }
+    // //         email,
+    // //         availability: 'unAvailable',
+    // //         name,
+    // //         bookingId:_id,
+    // //         deadline,
+    // //         banner_image,
+    // //         price_per_night,
+    // //         room_images,
+    // //         title,
+    // //         features_paragraph,
+    // //         room_description,
+    // //         max_guests,
+    // //         beds, 
+    // //         room_size
+    // //     }
+    // //     console.log(bookingData)
+    // //     try {
+    // //         const { data } = await axios.post(`${import.meta.env.VITE_URL}/mybooking`, bookingData)
+    // //         console.log(data)
+    // //         Swal.fire({
+    // //             icon: 'success',
+    // //             title: 'Booking successful',
+    // //             showConfirmButton: false,
+    // //             timer: 1500,
+    // //         });
+    // //         // toast.success('Book Data added Successfully!')
+    // //     } catch (err) {
+    // //         console.log(err)
+    // //         console.log('Hi, i am error', err.message)
+    // //     }
+    // // }
+
+    // const handleFormSubmission = async e => {
+    //     e.preventDefault();
+    //     const deadline = startDate;
+    //     const email = user?.email;
+    //     const name = user?.displayName;
+
+    //     const bookingData = {
+    //         email,
+    //         availability: 'unAvailable',
+    //         name,
+    //         bookingId: _id, // Ensure this is an array of IDs
+    //         deadline,
+    //         banner_image,
+    //         price_per_night,
+    //         room_images,
+    //         title,
+    //         features_paragraph,
+    //         room_description,
+    //         max_guests,
+    //         beds,
+    //         room_size
+    //     };
+
+    //     console.log(bookingData);
+    //     try {
+    //         // First API call to insert booking data
+    //         const { data } = await axios.post(`${import.meta.env.VITE_URL}/mybooking`, bookingData);
+    //         console.log(data);
+
+    //         // Second API call to update room availability
+
+    //         const { datas } = await axios.put(`${import.meta.env.VITE_URL}/rooms/${_id}`);
+    //         console.log(datas);
+    //         Swal.fire({
+    //             icon: 'success',
+    //             title: 'Booking successful',
+    //             showConfirmButton: false,
+    //             timer: 1500,
+    //         });
+    //     } catch (err) {
+    //         console.log(err);
+    //         console.log('Hi, I am error', err.message);
+    //     }
+    // };
+    const { user } = useContext(AuthContext);
+  const initialRooms = useLoaderData();
+  const [rooms, setRooms] = useState(initialRooms);
+  const [startDate, setStartDate] = useState(new Date());
+
+  const {
+    _id,
+    availability,
+    banner_image,
+    price_per_night,
+    room_images,
+    title,
+    features_paragraph,
+    room_description,
+    max_guests,
+    beds,
+    room_size
+  } = rooms;
+
+  useEffect(() => {
+    setRooms(initialRooms);
+  }, [initialRooms]);
+
+  const handleFormSubmission = async e => {
+    e.preventDefault();
+    const deadline = startDate;
+    const email = user?.email;
+    const name = user?.displayName;
+
+    const bookingData = {
+      email,
+      availability: 'unAvailable',
+      name,
+      bookingId: [_id], // Ensure this is an array of IDs
+      deadline,
+      banner_image,
+      price_per_night,
+      room_images,
+      title,
+      features_paragraph,
+      room_description,
+      max_guests,
+      beds,
+      room_size
+    };
+
+    console.log(bookingData);
+    try {
+      // First API call to insert booking data
+      const { data } = await axios.post(`${import.meta.env.VITE_URL}/mybooking`, bookingData);
+      console.log(data);
+
+      // Second API call to update room availability
+      await axios.put(`${import.meta.env.VITE_URL}/rooms/${_id}`);
+
+      // Fetch the updated room data
+      const updatedRoom = await axios.get(`${import.meta.env.VITE_URL}/rooms/${_id}`);
+      setRooms(updatedRoom.data);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Booking successful',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (err) {
+      console.log(err);
+      console.log('Hi, I am error', err.message);
     }
+  };
+
 
     return (
         <div>
@@ -130,8 +246,13 @@ const RoomPages = () => {
                     <div className="relative flex justify-center">
                         <div className="p-5">
                             <form onSubmit={handleFormSubmission}>
-                                {/* Open the modal using document.getElementById('ID').showModal() method */}
-                                <button type="button" className="btn bg-blue-700 text-white w-full mt-5 mb-5 ml-3" onClick={() => document.getElementById('my_modal_5').showModal()}>Book Now</button>
+                                {
+                                    availability === 'unAvailable' ?
+                                        <button disabled type="button" className="btn bg-blue-700 text-white w-full mt-5 mb-5 ml-3" >Book Now</button>
+                                        :
+                                        <button type="button" className="btn bg-blue-700 text-white w-full mt-5 mb-5 ml-3" onClick={() => document.getElementById('my_modal_5').showModal()}>Book Now</button>
+                                }
+
                                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                                     <div className="modal-box">
                                         <h3 className="font-bold text-lg">Hello!</h3>

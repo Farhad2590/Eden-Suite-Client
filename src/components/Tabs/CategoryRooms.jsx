@@ -1,28 +1,27 @@
 import { IoMdPerson } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-
 const CategoryRooms = ({ room }) => {
-    const { _id,banner_image, title, max_guests, availability, room_size, features_paragraph } = room
+    const { _id, banner_image, title, max_guests, availability, room_size, features_paragraph } = room;
     return (
-        <div className="  rounded-2xl border  border-dashed p-2 flex lg:w-full ">
-            <div className="lg:w-[50%]">
-                <img src={banner_image} alt="" />
+        <div className="rounded-2xl border border-dashed p-2 flex flex-col lg:flex-row lg:w-full">
+            <div className="lg:w-1/2 lg:pr-4">
+                <img src={banner_image} alt="" className="w-full" />
             </div>
-            <div className="lg:w-[50%] space-y-6 pl-5">
-                <h1 className="text-4xl pt-5">{title}</h1>
-                <div className="flex items-center">
-                    <IoMdPerson className="text-3xl" />
-                    <div className="text-xl">
-                        Max Guests : {max_guests}
+            <div className="lg:w-1/2 flex flex-col justify-between pl-0 lg:pl-4 pt-4 lg:pt-0">
+                <div className="space-y-6">
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl">{title}</h1>
+                    <div className="flex items-center">
+                        <IoMdPerson className="text-2xl md:text-3xl lg:text-3xl" />
+                        <div className="text-xl">Max Guests: {max_guests}</div>
                     </div>
+                    <p className="text-xl">Room Status: {availability}</p>
+                    <p>{features_paragraph}</p>
                 </div>
-                <p className="text-xl">Room Stastus : {availability}</p>
-                <p>{features_paragraph}</p>
-                <div >
+                <div className="mt-4 lg:mt-0">
                     <Link
                         to={`/rooms/${_id}`}
-                        className="px-8 py-4"
+                        className="px-8 py-4 block text-center"
                         style={{
                             borderColor: '#fad44a',
                             backgroundColor: '#fad44a',
@@ -36,8 +35,6 @@ const CategoryRooms = ({ room }) => {
                         Book Now
                     </Link>
                 </div>
-
-
             </div>
         </div>
     );

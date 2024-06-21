@@ -42,7 +42,7 @@
 //             )
 //             console.log(data)
 
-           
+
 //         } catch (err) {
 //             console.log(err)
 
@@ -253,12 +253,15 @@ const MyBook = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [items, setItems] = useState([])
     const [selectedRoomTitle, setSelectedRoomTitle] = useState('');
+    const [Id, setId] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const { user } = useContext(AuthContext)
     const name = user?.displayName;
     const email = user?.email;
     const image = user?.photoURL;
 
+    // const bookId = items.bookId
+    console.log(Id);
     useEffect(() => {
         getData()
     }, [user])
@@ -291,7 +294,7 @@ const MyBook = () => {
 
     const handleDelete = async (id, bookingId) => {
         const bookingData = {
-            availability: 'unAvailable',
+            availability: 'Available',
         }
         try {
             const confirmation = await Swal.fire({
@@ -306,7 +309,7 @@ const MyBook = () => {
             if (confirmation.isConfirmed) {
                 const { data } = await axios.delete(`${import.meta.env.VITE_URL}/myBooking/${id}`)
                 console.log(data)
-                const { data: update } = await axios.put(`${import.meta.env.VITE_URL}/rooms/${bookingId}`, bookingData)
+                const { data: update } = await axios.put(`${import.meta.env.VITE_URL}/roomsdata/${bookingId}`, bookingData)
                 console.log(update);
                 Swal.fire({
                     title: 'Success!',
@@ -327,7 +330,7 @@ const MyBook = () => {
         const comment_text = form.comment_text.value;
         const rating = form.rating.value;
         const timestamp = new Date().toISOString();
-
+        console.log(Id);
         const reviewData = {
             comment_text, rating, timestamp: timestamp, name, email, image, title: selectedRoomTitle,
         }
@@ -346,6 +349,11 @@ const MyBook = () => {
         } catch (err) {
             console.log(err)
         }
+    }
+    const handleButtonClick = (list) => {
+        setIsOpen(true);
+        setSelectedRoomTitle(list.title);
+        setId(list.bookingId);
     }
 
     return (
@@ -368,15 +376,16 @@ const MyBook = () => {
                             </div>
                             <p className="text-xl">Room Stastus : {list.availability}</p>
                             <p className="text-xl">Room Stastus : {list.deadline}</p>
-                            <div className="gap-3">
-                                <button onClick={() => { setIsOpen(true); setSelectedRoomTitle(list.title); }} className="btn btn-outline border border-[#aae0aa] hover:bg-[#aae0aa] hover:outline-none hover:text-white text-[#aae0aa]">
+                            <div className="flex  items-center">
+                                <button onClick={() => handleButtonClick(list)} className="btn btn-outline border border-[#aae0aa] hover:bg-[#aae0aa] hover:outline-none hover:text-white text-[#aae0aa]">
                                     Review
                                 </button>
+
                                 <div className="relative flex justify-center">
                                     <div className="p-5">
                                         <form onSubmit={e => handleFormSubmission(e, list.bookingId)}>
                                             {/* Open the modal using document.getElementById('ID').showModal() method */}
-                                            <button type="button" className="btn bg-blue-700 text-white w-full mt-5 mb-5 ml-3" onClick={() => document.getElementById('my_modal_5').showModal()}>Book Now</button>
+                                            <button type="button" className="btn btn-outline border border-[#aae0aa] hover:bg-[#aae0aa] hover:outline-none hover:text-white text-[#aae0aa]" onClick={() => document.getElementById('my_modal_5').showModal()}>Update Now</button>
                                             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                                                 <div className="modal-box">
                                                     <h3 className="font-bold text-lg">Hello!</h3>
@@ -389,7 +398,7 @@ const MyBook = () => {
                                                     </div>
                                                     <button
                                                         type='submit'
-                                                        className='bg-blue-700 text-white btn mt-5'>
+                                                        className='bg-blue-700 text-white btn '>
                                                         Confirm
                                                     </button>
                                                     <div className="modal-action">
