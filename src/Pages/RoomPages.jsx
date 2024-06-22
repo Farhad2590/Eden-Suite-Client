@@ -1,124 +1,33 @@
-
 import { useLoaderData } from "react-router-dom";
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../provider/AuthProvider";
-// import toast from "react-hot-toast";
-// import { useLoaderData } from "react-router-dom";
 import { AiTwotoneDollarCircle } from "react-icons/ai";
 import { GoPeople } from "react-icons/go";
 import { LuBedSingle } from "react-icons/lu";
 import { SlSizeFullscreen } from "react-icons/sl";
-import Swal from 'sweetalert2'
-// import { AuthContext } from "../provider/AuthProvider"
-// import { useState, useContext } from "react";
-// import axios from "axios";
-
-
+import Swal from 'sweetalert2';
 
 const RoomPages = () => {
-    // const [startDate, setStartDate] = useState(new Date())
-    // const { user } = useContext(AuthContext)
-    // // const { Room_Image, Room_Name, Room_Description, Price, Adults, Room_Size } = room;
-    // const rooms = useLoaderData()
-
-    // // const [bookingTo, setBookingTo] = useState('');
-    // // const { user } = useContext(AuthContext)
-
-    // console.log(rooms);
-    // const { _id, availability, banner_image, price_per_night, room_images, title, features_paragraph, room_description, max_guests, beds, room_size } = rooms
-
-    // // const handleFormSubmission = async e => {
-    // //     e.preventDefault()
-    // //     const deadline = startDate
-    // //     const email = user?.email
-    // //     const name = user?.displayName;
-
-
-    // //     const bookingData = {
-
-    // //         email,
-    // //         availability: 'unAvailable',
-    // //         name,
-    // //         bookingId:_id,
-    // //         deadline,
-    // //         banner_image,
-    // //         price_per_night,
-    // //         room_images,
-    // //         title,
-    // //         features_paragraph,
-    // //         room_description,
-    // //         max_guests,
-    // //         beds, 
-    // //         room_size
-    // //     }
-    // //     console.log(bookingData)
-    // //     try {
-    // //         const { data } = await axios.post(`${import.meta.env.VITE_URL}/mybooking`, bookingData)
-    // //         console.log(data)
-    // //         Swal.fire({
-    // //             icon: 'success',
-    // //             title: 'Booking successful',
-    // //             showConfirmButton: false,
-    // //             timer: 1500,
-    // //         });
-    // //         // toast.success('Book Data added Successfully!')
-    // //     } catch (err) {
-    // //         console.log(err)
-    // //         console.log('Hi, i am error', err.message)
-    // //     }
-    // // }
-
-    // const handleFormSubmission = async e => {
-    //     e.preventDefault();
-    //     const deadline = startDate;
-    //     const email = user?.email;
-    //     const name = user?.displayName;
-
-    //     const bookingData = {
-    //         email,
-    //         availability: 'unAvailable',
-    //         name,
-    //         bookingId: _id, // Ensure this is an array of IDs
-    //         deadline,
-    //         banner_image,
-    //         price_per_night,
-    //         room_images,
-    //         title,
-    //         features_paragraph,
-    //         room_description,
-    //         max_guests,
-    //         beds,
-    //         room_size
-    //     };
-
-    //     console.log(bookingData);
-    //     try {
-    //         // First API call to insert booking data
-    //         const { data } = await axios.post(`${import.meta.env.VITE_URL}/mybooking`, bookingData);
-    //         console.log(data);
-
-    //         // Second API call to update room availability
-
-    //         const { datas } = await axios.put(`${import.meta.env.VITE_URL}/rooms/${_id}`);
-    //         console.log(datas);
-    //         Swal.fire({
-    //             icon: 'success',
-    //             title: 'Booking successful',
-    //             showConfirmButton: false,
-    //             timer: 1500,
-    //         });
-    //     } catch (err) {
-    //         console.log(err);
-    //         console.log('Hi, I am error', err.message);
-    //     }
-    // };
     const { user } = useContext(AuthContext);
     const initialRooms = useLoaderData();
     const [rooms, setRooms] = useState(initialRooms);
     const [startDate, setStartDate] = useState(new Date());
+    const [review, setReview] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const { data } = await axios(`${import.meta.env.VITE_URL}/review`);
+                setReview(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
     const {
         _id,
@@ -138,11 +47,14 @@ const RoomPages = () => {
         setRooms(initialRooms);
     }, [initialRooms]);
 
+    const filteredReview = review.filter(reviews => reviews.room_title === title);
+
+    const deadline = startDate;
+    const email = user?.email;
+    const name = user?.displayName;
+
     const handleFormSubmission = async e => {
         e.preventDefault();
-        const deadline = startDate;
-        const email = user?.email;
-        const name = user?.displayName;
 
         const bookingData = {
             email,
@@ -161,7 +73,6 @@ const RoomPages = () => {
             room_size
         };
 
-        console.log(bookingData);
         try {
             // First API call to insert booking data
             const { data } = await axios.post(`${import.meta.env.VITE_URL}/mybooking`, bookingData);
@@ -185,7 +96,6 @@ const RoomPages = () => {
             console.log('Hi, I am error', err.message);
         }
     };
-
 
     return (
         <div>
@@ -227,14 +137,23 @@ const RoomPages = () => {
                                 <div className="flex items-center">
                                     <h1 className="px-2 text-xl"> Available : {availability}</h1>
                                 </div>
-                                <div className="flex items-center">
-                                    <h1 className="px-2 text-xl"> Reviews:</h1>
-                                </div>
                             </div>
+                            <div className="flex items-center flex-col">
+                                    <h1 className="px-2 text-xl">Reviews:</h1>
+                                    {filteredReview.length > 0 ? (
+                                        filteredReview.map((review, index) => (
+                                            <div key={index} className="review-item py-2">
+                                                {review.comment_text}
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div>No reviews available for this room.</div>
+                                    )}
+                                </div>
                         </div>
                     </div>
                     <div className="py-2 dark:bg-gray-100">
-                        <h1 href="#" className="text-center block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabIndex="0" role="link">Our {room_description} images</h1>
+                        <h1 className="text-center block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabIndex="0" role="link">Our {room_description} images</h1>
                         <div className="container flex flex-col justify-center p-4 mx-auto">
                             <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 sm:grid-cols-2">
                                 {room_images.map((roomImage, index) => (
@@ -258,8 +177,6 @@ const RoomPages = () => {
                                         <h3 className="font-bold text-lg">Hello!</h3>
                                         <div className='flex flex-col gap-2 ml-3 mt-5'>
                                             <label className='text-gray-700'>Deadline</label>
-
-                                            {/* Date Picker Input Field */}
                                             <DatePicker
                                                 className='border p-2 w-full rounded-md'
                                                 selected={startDate}
@@ -272,7 +189,6 @@ const RoomPages = () => {
                                         </button>
                                         <div className="modal-action">
                                             <form method="dialog">
-                                                {/* if there is a button in form, it will close the modal */}
                                                 <button className="btn">Close</button>
                                             </form>
                                         </div>
@@ -280,12 +196,9 @@ const RoomPages = () => {
                                 </dialog>
                             </form>
                         </div>
-
-
                     </div>
                 </div >
             </div >
-
         </div>
     );
 };

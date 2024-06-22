@@ -256,11 +256,11 @@ const MyBook = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { user } = useContext(AuthContext)
     const name = user?.displayName;
-    const email = user?.email;
+    const email = user.email;
     const image = user?.photoURL;
 
     // const bookId = items.bookId
-    console.log(Id);
+    console.log(email);
     useEffect(() => {
         getData()
     }, [user])
