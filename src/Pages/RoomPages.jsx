@@ -116,75 +116,75 @@ const RoomPages = () => {
     //     }
     // };
     const { user } = useContext(AuthContext);
-  const initialRooms = useLoaderData();
-  const [rooms, setRooms] = useState(initialRooms);
-  const [startDate, setStartDate] = useState(new Date());
+    const initialRooms = useLoaderData();
+    const [rooms, setRooms] = useState(initialRooms);
+    const [startDate, setStartDate] = useState(new Date());
 
-  const {
-    _id,
-    availability,
-    banner_image,
-    price_per_night,
-    room_images,
-    title,
-    features_paragraph,
-    room_description,
-    max_guests,
-    beds,
-    room_size
-  } = rooms;
+    const {
+        _id,
+        availability,
+        banner_image,
+        price_per_night,
+        room_images,
+        title,
+        features_paragraph,
+        room_description,
+        max_guests,
+        beds,
+        room_size
+    } = rooms;
 
-  useEffect(() => {
-    setRooms(initialRooms);
-  }, [initialRooms]);
+    useEffect(() => {
+        setRooms(initialRooms);
+    }, [initialRooms]);
 
-  const handleFormSubmission = async e => {
-    e.preventDefault();
-    const deadline = startDate;
-    const email = user?.email;
-    const name = user?.displayName;
+    const handleFormSubmission = async e => {
+        e.preventDefault();
+        const deadline = startDate;
+        const email = user?.email;
+        const name = user?.displayName;
 
-    const bookingData = {
-      email,
-      availability: 'unAvailable',
-      name,
-      bookingId: [_id], // Ensure this is an array of IDs
-      deadline,
-      banner_image,
-      price_per_night,
-      room_images,
-      title,
-      features_paragraph,
-      room_description,
-      max_guests,
-      beds,
-      room_size
+        const bookingData = {
+            email,
+            availability: 'unAvailable',
+            name,
+            bookingId: [_id], // Ensure this is an array of IDs
+            deadline,
+            banner_image,
+            price_per_night,
+            room_images,
+            title,
+            features_paragraph,
+            room_description,
+            max_guests,
+            beds,
+            room_size
+        };
+
+        console.log(bookingData);
+        try {
+            // First API call to insert booking data
+            const { data } = await axios.post(`${import.meta.env.VITE_URL}/mybooking`, bookingData);
+            console.log(data);
+
+            // Second API call to update room availability
+            await axios.put(`${import.meta.env.VITE_URL}/rooms/${_id}`);
+
+            // Fetch the updated room data
+            const updatedRoom = await axios.get(`${import.meta.env.VITE_URL}/rooms/${_id}`);
+            setRooms(updatedRoom.data);
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Booking successful',
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        } catch (err) {
+            console.log(err);
+            console.log('Hi, I am error', err.message);
+        }
     };
-
-    console.log(bookingData);
-    try {
-      // First API call to insert booking data
-      const { data } = await axios.post(`${import.meta.env.VITE_URL}/mybooking`, bookingData);
-      console.log(data);
-
-      // Second API call to update room availability
-      await axios.put(`${import.meta.env.VITE_URL}/rooms/${_id}`);
-
-      // Fetch the updated room data
-      const updatedRoom = await axios.get(`${import.meta.env.VITE_URL}/rooms/${_id}`);
-      setRooms(updatedRoom.data);
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Booking successful',
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (err) {
-      console.log(err);
-      console.log('Hi, I am error', err.message);
-    }
-  };
 
 
     return (

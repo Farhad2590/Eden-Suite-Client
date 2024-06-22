@@ -11,6 +11,7 @@ import RoomPages from "../Pages/RoomPages";
 import MyBook from "../Pages/MyBook";
 import PrivateRoute from "../routes/PrivateRoute";
 import Error from "../Pages/Error";
+import UpdateBook from "../Pages/UpdateBook";
 
 
 
@@ -51,23 +52,10 @@ const router = createBrowserRouter([
         element: <PrivateRoute><MyBook></MyBook></PrivateRoute>,
 
       },
-      // {
-      //   path: '/update/:id',
-      //   element: <UpdateBook />,
-      //   loader: async ({ params }) => {
-      //     try {
-      //       const response = await fetch(`${import.meta.env.VITE_URL}/rooms/${params.id}`);
-      //       if (!response.ok) {
-      //         throw new Error('Failed to fetch data');
-      //       }
-      //       const data = await response.json();
-      //       return data;
-      //     } catch (error) {
-      //       console.error(error);
-      //       return { error: 'Failed to fetch data' };
-      //     }
-      //   },
-      // }
+      {
+        path: '/update/:id',
+        element: <UpdateBook />,
+      }
     ]
   },
 ]);

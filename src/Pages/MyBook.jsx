@@ -245,12 +245,11 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { IoMdPerson } from "react-icons/io";
 import { Link } from "react-router-dom";
-import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { AuthContext } from "../provider/AuthProvider";
 
 const MyBook = () => {
-    const [startDate, setStartDate] = useState(new Date())
+
     const [items, setItems] = useState([])
     const [selectedRoomTitle, setSelectedRoomTitle] = useState('');
     const [Id, setId] = useState('');
@@ -271,26 +270,6 @@ const MyBook = () => {
         setItems(data);
     }
 
-    const handleFormSubmission = async (e, id) => {
-        e.preventDefault()
-        const deadline = startDate
-        const email = user?.email
-        const BookData = {
-            deadline,
-            email,
-        }
-        try {
-            const { data } = await axios.put(
-                `${import.meta.env.VITE_URL}/roomsdata/${id}`,
-                BookData
-            )
-            console.log(data)
-
-        } catch (err) {
-            console.log(err)
-
-        }
-    }
 
     const handleDelete = async (id, bookingId) => {
         const bookingData = {
@@ -384,31 +363,9 @@ const MyBook = () => {
                                 <div className="relative flex justify-center">
                                     <div className="p-5">
                                         <form onSubmit={e => handleFormSubmission(e, list.bookingId)}>
-                                            {/* Open the modal using document.getElementById('ID').showModal() method */}
-                                            <button type="button" className="btn btn-outline border border-[#aae0aa] hover:bg-[#aae0aa] hover:outline-none hover:text-white text-[#aae0aa]" onClick={() => document.getElementById('my_modal_5').showModal()}>Update Now</button>
-                                            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-                                                <div className="modal-box">
-                                                    <h3 className="font-bold text-lg">Hello!</h3>
-                                                    <div className='flex flex-col gap-2 ml-3 mt-5'>
-                                                        <label className='text-gray-700'>Deadline</label>
-                                                        <DatePicker
-                                                            className='border p-2 w-full rounded-md'
-                                                            selected={startDate}
-                                                            onChange={date => setStartDate(date)} />
-                                                    </div>
-                                                    <button
-                                                        type='submit'
-                                                        className='bg-blue-700 text-white btn '>
-                                                        Confirm
-                                                    </button>
-                                                    <div className="modal-action">
-                                                        <form method="dialog">
-                                                            {/* if there is a button in form, it will close the modal */}
-                                                            <button className="btn">Close</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </dialog>
+                                        <Link to={`//${list._id}`}>
+                                        <button className="btn">Update Now</button>
+                                        </Link>
                                         </form>
                                     </div>
                                 </div>
