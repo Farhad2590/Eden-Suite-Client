@@ -41,9 +41,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/rooms/:id',
-        element: (
-          <PrivateRoute><RoomPages></RoomPages></PrivateRoute>
-        ),
+        element:
+          <PrivateRoute><RoomPages></RoomPages></PrivateRoute>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_URL}/rooms/${params.id}`),
       },
@@ -55,6 +54,8 @@ const router = createBrowserRouter([
       {
         path: '/update/:id',
         element: <UpdateBook />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_URL}/myBooking/${params.id}`),
       }
     ]
   },

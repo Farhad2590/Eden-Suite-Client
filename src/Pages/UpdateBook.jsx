@@ -7,45 +7,49 @@ import Swal from "sweetalert2";
 
 
 const UpdateBook = () => {
-    const { id } = useParams()
-    console.log(id);
-    const { user } = useContext(AuthContext)
-
+    const { id } = useParams();
+    const { user } = useContext(AuthContext);
+    const [items, setItems] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
-    const [items, setItems] = useState([])
-
-    useEffect(() => {
-        getData()
-    }, [user])
-
-    const getData = async () => {
-        const { data } = await axios(`${import.meta.env.VITE_URL}/myBooking/${user?.email}`)
-        setItems(data);
-    }
-
-    console.log(items);
 
     const roomDetails = items.find(item => item._id === id);
-    console.log(roomDetails);
+    const { _id, deadline } = roomDetails || {};
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Perform form submission logic here, e.g., send data to server
-        console.log('Form submitted!', startDate);
-        // Reset form or perform any additional action
-        const deadline = startDate
-        const email = user?.email
-        const BookData = {
-            deadline,
-            email,
+    useEffect(() => {
+        if (user) {
+            getData();
         }
+    }, [user]);
+
+    const getData = async () => {
+        try {
+            const { data } = await axios.get(`${import.meta.env.VITE_URL}/myBooking/${user?.email}`);
+            setItems(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    useEffect(() => {
+        if (deadline) {
+            setStartDate(new Date(deadline));
+        }
+    }, [deadline]);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const BookData = {
+            deadline: startDate,
+            email: user?.email,
+        };
 
         try {
-            const { data } = axios.put(
+            const { data } = await axios.put(
                 `${import.meta.env.VITE_URL}/roomsdata/${id}`,
                 BookData
-            )
-            console.log(data)
+            );
+            console.log(data);
             // if (data.modifiedCount > 0) {
             //     Swal.fire({
             //         icon: 'success',
@@ -54,12 +58,10 @@ const UpdateBook = () => {
             //         timer: 1500,
             //     });
             // }
-
         } catch (err) {
-            console.log(err)
-
+            console.error('Error updating booking date:', err);
         }
-    }
+    };
     return (
         <div className="container mx-auto mt-8">
             <h1 className="text-2xl font-bold mb-4">Booking Details</h1>
@@ -73,8 +75,7 @@ const UpdateBook = () => {
                         <DatePicker
                             className='border p-2 w-full rounded-md mt-4'
                             selected={startDate}
-                            onChange={date => setStartDate(date)}
-                            defaultValue={new Date(roomDetails.bookingDate)} // Assuming bookingDate is in a format recognized by Date constructor
+                            onChange={(date) => setStartDate(date)}
                         />
                     </div>
                     <button type="submit" className="bg-blue-700 text-white btn mt-4">

@@ -336,10 +336,10 @@ const MyBook = () => {
     }
 
     return (
-        <div className='bg-[#ebefeb]  flex flex-col md:flex-row justify-around gap-5  items-center min-h-[calc(100vh-306px)] md:max-w-screen-xl mx-auto '>
+        <div className='bg-[#ebefeb] flex flex-col md:flex-row justify-around gap-5 items-center min-h-[calc(100vh-306px)] md:max-w-screen-xl mx-auto'>
             <div className="max-w-5xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
                 {items.map((list) => (
-                    <div key={list._id} className=" flex lg:w-full  rounded-2xl border  border-dashed p-2 ">
+                    <div key={list._id} className="flex lg:w-full rounded-2xl border border-dashed p-2">
                         <div className="lg:w-[50%]">
                             <img src={list.banner_image} alt="" />
                         </div>
@@ -353,20 +353,18 @@ const MyBook = () => {
                                     Max Guests : {list.max_guests}
                                 </div>
                             </div>
-                            <p className="text-xl">Room Stastus : {list.availability}</p>
-                            <p className="text-xl">Room Stastus : {list.deadline}</p>
-                            <div className="flex  items-center">
+                            <p className="text-xl">Room Status : {list.availability}</p>
+                            <p className="text-xl">Deadline : {list.deadline}</p>
+                            <div className="flex items-center">
                                 <button onClick={() => handleButtonClick(list)} className="btn btn-outline border border-[#aae0aa] hover:bg-[#aae0aa] hover:outline-none hover:text-white text-[#aae0aa]">
                                     Review
                                 </button>
 
                                 <div className="relative flex justify-center">
                                     <div className="p-5">
-                                        <form onSubmit={e => handleFormSubmission(e, list.bookingId)}>
-                                        <Link to={`//${list._id}`}>
-                                        <button className="btn">Update Now</button>
+                                        <Link to={`/update/${list._id}`}>
+                                            <button className="btn">Update Now</button>
                                         </Link>
-                                        </form>
                                     </div>
                                 </div>
                                 <button onClick={() => handleDelete(list._id, list.bookingId)} className="btn btn-outline border border-[#aae0aa] hover:bg-[#aae0aa] hover:outline-none hover:text-white text-[#aae0aa]">
@@ -376,6 +374,7 @@ const MyBook = () => {
                         </div>
                     </div>
                 ))}
+
                 {isOpen && (
                     <div className="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                         <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
@@ -385,8 +384,8 @@ const MyBook = () => {
                                     Review Room
                                 </h3>
                                 <form onSubmit={handleReviewSubmit} className="mt-4" action="#">
-                                    <label className="block mt-3" htmlFor="email">User Name</label>
-                                    <input type="text" name="text" id="text" placeholder="user@email.xyz" value={name} className="block w-full px-4 py-3 text-sm text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" />
+                                    <label className="block mt-3" htmlFor="text">User Name</label>
+                                    <input type="text" name="text" id="text" placeholder="user@email.xyz" value={name} onChange={e => setName(e.target.value)} className="block w-full px-4 py-3 text-sm text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" />
                                     <label className="block mt-3" htmlFor="commentText">Write A Comment</label>
                                     <textarea
                                         name="comment_text"
@@ -419,6 +418,7 @@ const MyBook = () => {
                 )}
             </div>
         </div>
+
     );
 };
 
