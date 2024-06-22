@@ -363,7 +363,7 @@ const MyBook = () => {
                                 <div className="relative flex justify-center">
                                     <div className="p-5">
                                         <Link to={`/update/${list._id}`}>
-                                            <button className="btn">Update Now</button>
+                                            <button className="btn btn-outline border border-[#aae0aa] hover:bg-[#aae0aa] hover:outline-none hover:text-white text-[#aae0aa]">Update Now</button>
                                         </Link>
                                     </div>
                                 </div>
