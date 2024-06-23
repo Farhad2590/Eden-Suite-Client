@@ -288,7 +288,7 @@ const MyBook = () => {
             if (confirmation.isConfirmed) {
                 const { data } = await axios.delete(`${import.meta.env.VITE_URL}/myBooking/${id}`)
                 console.log(data)
-                const { data: update } = await axios.put(`${import.meta.env.VITE_URL}/roomsdata/${bookingId}`, bookingData)
+                const { data: update } = await axios.put(`${import.meta.env.VITE_URL}/roomsCancel/${bookingId}`, bookingData)
                 console.log(update);
                 Swal.fire({
                     title: 'Success!',

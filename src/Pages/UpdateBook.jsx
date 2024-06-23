@@ -50,14 +50,14 @@ const UpdateBook = () => {
                 BookData
             );
             console.log(data);
-            // if (data.modifiedCount > 0) {
-            //     Swal.fire({
-            //         icon: 'success',
-            //         title: 'Booking Date Updated',
-            //         showConfirmButton: false,
-            //         timer: 1500,
-            //     });
-            // }
+            if (data.modifiedCount > 0) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Booking Date Updated',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
         } catch (err) {
             console.error('Error updating booking date:', err);
         }
