@@ -1,10 +1,10 @@
-# [Kinsley](https://euphonious-crisp-0017ec.netlify.app/)
+# [EdenSuite](https://b9a11-client-side-farhad2590.web.app)
 
 
 # key Features
 
 - Authentication (email , password, googleLogin)
-- User can be add Book (dynamic Book) 
-- Show View Details 
-- Add,Update Book 
-- Dark mode,Light Mode
+- User can Book Room (dynamic Book)
+- Show Room Details 
+- Delete,Update Review 
+- Availavle And UnAvailabe Rooms
