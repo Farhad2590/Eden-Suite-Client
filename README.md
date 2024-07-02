@@ -1,5 +1,5 @@
 ### Live Site URL:
-[https://eateassy-41e3e.web.app](https://b9a11-client-side-farhad2590.web.app)
+[https://b9a11-client-side-farhad2590.web.app](https://b9a11-client-side-farhad2590.web.app)
 
 ---
 
@@ -18,8 +18,8 @@ Ensure you have the following software installed on your system:
 First, clone the repository to your local machine using Git.
 
 ```bash
-git clone https://github.com/Farhad2590/Eat-Eassy-Client.git
-cd eateassy
+git clone https://github.com/Farhad2590/Eden-Suite-Client.git
+cd Eden-Suite-Client
 ```
 
 then run command <br>
